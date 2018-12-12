@@ -110,10 +110,10 @@ array = ["one", "two", "three", "four", "five"]
 memory. The computer actually stores all the elements of an array together in
 memory, with each cell of the computer's memory holding one element's value. The
 computer records the memory address of where that array started and uses it to
-jump straight to that spot in memory. How the computer store the information is
+jump straight to that spot in memory. How the computer stores the information is
 not the key point here so we will not go into much detail here.
 
-Reading from an array takes one step. Each cell in an array is given an index.
+**Reading from an array takes one step**. Each cell in an array is given an index.
 The index always begins at 0 and increases by 1 with each element. The
 computer is able to 'jump' to any index in an array and get the data from
 inside.
@@ -126,28 +126,28 @@ grab the data from that point.
 #### Searching
 If we wanted to check if a value exists in this array then we would use the
 search operation. Say we wanted to check if the value `"six"` was in the array.
-We can just glance at the array and clearly see that it is not but the computer
+We can just glance at the array and clearly see that it is not, but the computer
 does not have this skill. The computer needs to access every element
 individually and check if the value it get's back is `"six"`. If it finds a
-match it will stop and return true else it will continue till there are no more
-elements, at which point it will return false.
+match it will stop and return `true` otherwise it will continue until there are no more
+elements, at which point it will return `false`.
 
-Let's count the number of steps that searching our array for the value "six"
+Let's count the number of steps that searching our array for the value `"six"`
 would take. The computer starts by checking index 0 and sees that the value it
 contains is `"one"` so moves on to the next index. At index 1 it checks the
 value and sees that it is `"two"`. This is not what we are looking for so the
 computer again moves on....
 (the computer repeats these steps until it gets to the end of the array).
 
-In total the computer had to check 5 elements before it could be sure that the
-value was not there so this operation took 5 steps to complete. If the array
-had a million values then the operation could potentially take million steps to
+In total **the computer had to check 5 elements before it could be sure that the
+value was not there so this operation took 5 steps to complete**. If the array
+had a million values then the operation **could potentially take a million steps** to
 complete. However, if the element we were searching for was the first element in
-the array, then the operation would only take 1 step. The number of steps is
-dependent on where or if the element is in the array.
+the array, then the operation would only take 1 step. **The number of steps is
+dependent on where or if the element is in the array.**
 
-This type of search is known as a linear search. There are other, more complex
-types of search as well but this is just a basic search that will work will all
+This type of search is known as a **linear search**. There are other, more complex
+types of search as well but this is just a basic search that will work with all
 array types.
 
 #### Inserting and deleting
@@ -157,12 +157,12 @@ I'll cover both here.
 Say we want to insert a value into our array. Similar to how the number of
 steps in searching is dependent on where the value is in the array, inserting
 depends on where you want to insert the element into the array. If you want to
-insert an element on the the end of an array then this is considered the 'best
+insert an element onto the end of an array then this is considered the 'best
 case scenario' as it only take the computer one step.
 
 The number of steps increase when you want to insert an element anywhere else in
 the array. Say for example you want to insert the value`"ten"` into our array near the 
-earlier at index 2. Currently, index 2 has a value. It has a the value
+beginning at index 2. But index 2 already has a value, it has the value
 `"three"`. As we do not want to replace any of the values in our array, we only
 want to add to it, we first need to shift all the values over to make space.
 
@@ -207,8 +207,8 @@ element from the array.
 
 ### Set (array-based set)
 
-An array based set is very similar to an array but with one key difference, it
-never allows duplicate values to be inserted.
+An array based set is very similar to an array but with one key difference, **it
+never allows duplicate values to be inserted.**
 
 For example, what have the following set...
 ```
@@ -226,7 +226,7 @@ with the exception of insert.
 
 When we call insert on our array based set it does work similarly to our example
 above but, before it can insert, it first needs to check every cell to make sure
-the value we want to insert if not already in the set.
+the value we want to insert is not already in the set.
 
 Let's take our currently defined set and try to insert the value `4` onto the
 end
