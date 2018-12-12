@@ -49,7 +49,7 @@ In computing an algorithm is the same thing. Just a set of steps for a computer
 program to accomplish a task.
 
 There are often a number of ways your could accomplish a task so learning to
-pick the right algorithm is a key.
+ pick the right algorithm is key.
 
 ## *How*?
 
@@ -60,7 +60,7 @@ learn a little more about elixir, head over to
 ## Data Structures
 
 As we mentioned earlier, data structures refer to how data is organised. This
-organisation is not just for organisations sake however. The data structures you
+organisation is not just for organisation's sake however. The data structures you
 use could massively effect the speed at which your application runs. It could
 even be the difference between whether you app runs at all or errors because it
 cannot handle the load.
@@ -106,9 +106,9 @@ array = ["one", "two", "three", "four", "five"]
 ```
 
 #### Reading
-> The following examples are not 'exactly' how the computer store arrays in
+> The following examples are not 'exactly' how the computer stores arrays in
 memory. The computer actually stores all the elements of an array together in
-memory, with each cell of the computers memory holding one elements value. The
+memory, with each cell of the computer's memory holding one element's value. The
 computer records the memory address of where that array started and uses it to
 jump straight to that spot in memory. How the computer store the information is
 not the key point here so we will not go into much detail here.
@@ -161,7 +161,7 @@ insert an element on the the end of an array then this is considered the 'best
 case scenario' as it only take the computer one step.
 
 The number of steps increase when you want to insert an element anywhere else in
-the array. Say for example you want to insert the `"ten"` into our array from
+the array. Say for example you want to insert the value`"ten"` into our array near the 
 earlier at index 2. Currently, index 2 has a value. It has a the value
 `"three"`. As we do not want to replace any of the values in our array, we only
 want to add to it, we first need to shift all the values over to make space.
@@ -180,8 +180,8 @@ This insert would have taken 4 steps in total.
 ```
 step 1 - shifting value "five" from index 4 to index 5
 step 2 - shifting value "four" from index 3 to index 4
-step 1 - shifting value "three" from index 2 to index 3
-step 1 - inserting value "ten" in index 2
+step 3 - shifting value "three" from index 2 to index 3
+step 4 - inserting value "ten" in index 2
 ```
 
 The worst case for inserting into an array would be inserting into the start of
@@ -197,9 +197,9 @@ If we want to delete the value at index 2 from our array (the value `"ten"`)
 then the following steps would be taken...
 ```
 step 1 - deleting value "ten" in index 2
-step 1 - shifting value "three" from index 3 to index 2
-step 2 - shifting value "four" from index 4 to index 3
-step 1 - shifting value "five" from index 5 to index 4
+step 2 - shifting value "three" from index 3 to index 2
+step 3 - shifting value "four" from index 4 to index 3
+step 4 - shifting value "five" from index 5 to index 4
 ```
 
 The worst case for deleting, just like inserting, is to delete the first
@@ -209,3 +209,64 @@ element from the array.
 
 An array based set is very similar to an array but with one key difference, it
 never allows duplicate values to be inserted.
+
+For example, what have the following set...
+```
+set = [1,2,3]
+```
+
+If we tried to add `1` to the set the computer would not let it happen as the
+set already contains the value.
+
+Sets come in handy when you need to make sure that you have no duplicate
+data.
+
+The operations that we used on our array all work in the same way on our set,
+with the exception of insert.
+
+When we call insert on our array based set it does work similarly to our example
+above but, before it can insert, it first needs to check every cell to make sure
+the value we want to insert if not already in the set.
+
+Let's take our currently defined set and try to insert the value `4` onto the
+end
+
+```
+step 1 - check the value at index 0
+step 2 - check the value at index 1
+step 3 - check the value at index 2
+step 4 - insert value 4 onto the end of set
+```
+
+In the above example, we inserted onto the end of our set and it took 4 steps.
+Like inserting onto the end of an array, this is the best case scenario. Unlike
+the array, this took 4 steps compared to 1.
+
+This means that if we had a set containing 1,000,000 items and we wanted to
+insert onto the end of that set it would take 1,000,000 steps checking the
+values in the indexes and then 1 step inserting. Number of steps is `N + 1`.
+
+Remember, this is the best case scenario. The worst case scenario is if want to
+insert into the first element of our set. If we so this, it has to first check
+every index, then shift every index over by one (like inserting into the array
+did).
+
+Let's insert `4` into the start of our set this time...
+
+```
+step 1 - check the value at index 0
+step 2 - check the value at index 1
+step 3 - check the value at index 2
+step 4 - shift the value 3 to index 3
+step 5 - shift the value 2 to index 2
+step 6 - shift the value 1 to index 1
+step 7 - insert value 4 into index 0
+```
+
+This took 7 steps to complete. The way we could express this 'worst case
+scenario' is `2N + 1`.
+
+As you can see this is almost exactly double the number of steps needed to
+insert into an array. That doesn't mean that sets are a bad data structure
+however. If you need to make sure there is no duplicate data then this could be
+the right fit for you. If not, you may be better off with an array.
