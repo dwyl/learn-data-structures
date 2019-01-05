@@ -49,7 +49,7 @@ In computing an algorithm is the same thing. Just a set of steps for a computer
 program to accomplish a task.
 
 There are often a number of ways your could accomplish a task so learning to
- pick the right algorithm is key.
+pick the right algorithm is key.
 
 ## *How*?
 
@@ -161,7 +161,7 @@ insert an element onto the end of an array then this is considered the 'best
 case scenario' as it only take the computer one step.
 
 The number of steps increase when you want to insert an element anywhere else in
-the array. Say for example you want to insert the value`"ten"` into our array near the 
+the array. Say for example you want to insert the value`"ten"` into our array near the
 beginning at index 2. But index 2 already has a value, it has the value
 `"three"`. As we do not want to replace any of the values in our array, we only
 want to add to it, we first need to shift all the values over to make space.
@@ -270,3 +270,171 @@ As you can see this is almost exactly double the number of steps needed to
 insert into an array. That doesn't mean that sets are a bad data structure
 however. If you need to make sure there is no duplicate data then this could be
 the right fit for you. If not, you may be better off with an array.
+
+### Ordered Array
+
+An ordered array is again very similar to an array. The difference here, as the
+name suggests, is that this array has to be ordered.
+
+Lets take the following array...
+```
+[1,2,4,5]
+```
+and try to insert the value `3`.
+
+Inserting works in a similar way to the set insert. First the computer would
+have to go to index 0 and compare the value inside against the one we want to
+insert. If the value we want to insert is greater than what is inside index 0,
+then we move on. It repeats the steps until it comes across a value that is
+greater than the value we want to insert. At this point it then shifts all the
+values up an index and inserts the value.
+
+In our case `3` would be inserted into index 2.
+
+Search also works in a similar way to previous examples but with a key
+difference. With an ordered array, a search can stop early if we know a value
+could not possibly be contained in the array.
+
+For example take the following array
+```
+[1, 10, 37, 85, 96]
+```
+
+Now we tell computer to search this for the value `26`. As we mentioned, the
+computer will need to check each cell, one at a time, in order, so it sounds
+pretty similar to the previous searches. The difference here is that when the
+computer comes across a cell that has a larger value than the one we are
+searching for, it can immediately stop looking as it knows it can not exist past
+that point.
+
+```
+step 1 - check the value at index 0
+step 2 - check the value at index 1
+step 3 - check the value at index 2
+```
+
+Only 3 steps needed. Once the computer gets to `index 2` and sees the value `37`
+it knows that is larger than the `26` we are looking for and can stop searching
+at that point.
+
+Of course this won't always be the case. If you were looking for 96, or greater,
+the search would still have to check every cell.
+
+However this assumes that our search always starts at the beginning of an array
+and works its way through looking for the element in question. This is not true.
+A linear search is just one of many algorithms that can be used for searching
+arrays.
+
+## Algorithms
+
+An algorithm, as we mentioned earlier, is a set of steps for solving a problem.
+
+There are many different algorithms, and there are often multiple algorithms
+that can be used to achieve the same end results. How they work will be
+different however.
+
+Imagine you are travelling home and your travel options are, a combination of
+public transport and walking, or riding a bike. Both will have the same result
+of getting you home but one may be faster, safer, more convenient etc. For
+example, if your journey home was 300 miles long and there was a super fast
+train that took you within a 2 minute walk of your front door, this may be a
+better option than riding your bike home (unless you like that kind of thing).
+But this doesn't mean that public transport is always the way to go. Let's say
+now your journey home is only 2 miles and there is no direct transport option.
+In this situation it may be better for you to ride your bike.
+
+The point of the above is to show that although both have the same result,
+depending on the situation, each 'algorithm' has its purpose.
+
+Picking the one that suites your needs is important as it can greatly effect the
+performance of an application.
+
+We have already seen how to perform a linear search on an array so let's check
+out a new type of search. Binary.
+
+Binary search works by checking the middle element of a list, checking if it
+contains the value we are after, and depending on the value in that cell, knows
+if is should check the first or second half of the array. This means that after
+just one step, binary search has already found that it no longer needs to search
+half of the elements in the list (because of the way it works binary search
+can only be used on ordered arrays).
+
+Let's look at an example array of 1 to 10.
+```
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+And search for the value `7`.
+
+If we were to use linear search the computer would check each cell, starting at
+`index 0` and working its way up the indexes until it finds our value. We can see
+that this would take `7` steps.
+
+Let's see how binary search will effect this.
+
+First the computer jumps to the middle of the array and checks the value there.
+That value is `5`. As we are searching for the number `7`, and as this is an
+ordered array, the computer knows that everything 'to the left' of index 4 is
+also lower in value than 7. This means that is can remove these from the list of
+possible indexes left to check.
+
+Now we are left with the values 6 to 9 to check. The computer will again pick the middle index and check to see if it contains our number. In our case there is no exact middle. Could be index 6 or 7 (values 7 or 8) but we'll say in this case the computer picks the lower of the two middle choices and goes with index 6.
+
+Binary search just found our number in 2 steps!!!!!
+
+
+```
+step 1 - check the value at index 4
+  value is 5 so computer discards it and everything to the left away
+  left with indexes of 5,6,7,8
+step 2 - check the value at index 6
+  value returned is 7
+```
+
+Let's do another example where we have to look for `1,000,000` from an array of
+numbers ranging from 1 to 1,000,000. Remember, this is a worst case scenario.
+
+As mentioned in the searching section above, the linear search would take
+all `1,000,000` steps to complete this. Let's compare this to the binary search
+
+Binary steps
+```
+  step 1 - check the value at 500,000
+    value is less than we are looking for so discard it and everything less than
+    it. (Just cleared HALF A MILLION STEPS IN ONE GO!!!!)
+  step 2 - check the value at 750,000
+    value is less than we are looking for so discard it and everything less than
+    it.
+  step 3 - check the value at 875,000 - too low, discard all to left
+  step 4 - check the value at 937,500 - too low, discard all to left
+  step 5 - check the value at 968,750 - you get the idea...
+  step 6 - check the value at 968,750
+  step 7 - check the value at 984,375
+  step 8 - check the value at 992,187
+  step 9 - check the value at 996,093
+  step 10 - check the value at 998,046
+  step 11 - check the value at 999,023
+  step 12 - check the value at 999,511
+  step 13 - check the value at 999,755 - getting close
+  step 14 - check the value at 999,877
+  step 15 - check the value at 999,938
+  step 16 - check the value at 999,969
+  step 17 - check the value at 999,984
+  step 18 - check the value at 999,992
+  step 19 - check the value at 999,996 - nearly there
+  step 20 - check the value at 999,998
+  step 21 - check the value at 999,999
+  step 22 - check the value at 1,000,000 - WE MADE IT
+```
+
+This might seem like a lot of text/steps but just think about what this search
+algorithm just managed to do. It took a worst case scenario of searching an
+array of `1,000,000` values for its `1,000,000`th value and fount it in 22
+steps.
+
+This means the maximum number of steps searching an ordered array of a million
+values with binary search is `22`. Quite the improvement over a million I'm sure
+you'll agree.
+
+Check out [this youtube video](https://www.youtube.com/watch?v=EXtkCmRXfMo) to
+learn more about binary and linear search.
